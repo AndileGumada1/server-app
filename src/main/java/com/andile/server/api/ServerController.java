@@ -7,18 +7,21 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import static java.time.LocalDateTime.now;
 import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
+@CrossOrigin("http://localhost:4200/")
 @RestController
-@RequestMapping("api/servers")
+@RequestMapping("/servers")
 @RequiredArgsConstructor
 @Slf4j
 public class ServerController {
@@ -72,7 +75,7 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timestamp(now())
-                        .data(of("server", serviceImplementation.update(server)))
+                        .data(of("Server", serviceImplementation.update(server)))
                         .message("Server updated successfully")
                         .status(OK)
                         .statusCode(OK.value())
@@ -85,21 +88,25 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timestamp(now())
-                        .data(of("server", serviceImplementation.get(id)))
-                        .message("server retrieved")
+                        .data(of("Server", serviceImplementation.get(id)))
+                        .message("Server retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
         );
     }
 
+    /**
+     * @param id
+     * @return
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Response> deleteServer(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timestamp(now())
-                        .data(of("server deleted", serviceImplementation.delete(id)))
-                        .message("server deleted")
+                        .data(of("Server deleted", serviceImplementation.delete(id)))
+                        .message("Server deleted")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -108,6 +115,8 @@ public class ServerController {
 
     @GetMapping(path = "/image/{fileName}", produces = IMAGE_PNG_VALUE)
     public byte[] getServerImage(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get("/home/andile" + "/Documents/SchoolOfIT/Java/" + fileName));
+        log.info("Image file {}:",fileName);
+        return Files.readAllBytes(Paths.get("/home/andile" +
+                "/Documents/SchoolOfIT/Java/" + fileName));
     }
 }
