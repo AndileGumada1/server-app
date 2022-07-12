@@ -31,9 +31,9 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("Server Application API")
+                .title("Server Management Application API")
                 .version("1.0")
-                .description("API for Server Application")
+                .description("API for Server Management Application Users can add, list, update, delete, sort, and filter Servers according to their Status.")
                 .contact(new Contact("Andile Gumada",
                         "http://programmingtechie.com",
                         "decemberandile@email.com"))
