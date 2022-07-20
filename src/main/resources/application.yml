@@ -2,9 +2,9 @@ server:
   port: 8081
 spring:
   datasource:
-    password: dbbd8437
-    url: jdbc:mysql://us-cdbr-east-06.cleardb.net:3306/heroku_c5006a34d63fc1a
-    username: b9a4ec2992efe8
+    password: 31e09ef9
+    url: jdbc:mysql://us-cdbr-east-06.cleardb.net:3306/ heroku_723ff157fe14dfe
+    username: bcc6f80a16f609
     hikari:
       maxLifetime: 20000
     mvc:
@@ -12,7 +12,8 @@ spring:
     matching-strategy : ANT_PATH_MATCHER
   jpa:
     hibernate:
-    properties: update
+      ddl-auto: update
+    properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
